@@ -1,0 +1,17 @@
+name: HorizonAdminMonitor
+version: ${project.version}
+main: dev.dsmnh.horizon.adminmonitor.HorizonAdminMonitor
+author: dsmnh
+description: Broadcasts administrator actions to all players.
+load: POSTWORLD
+softdepend: [ProtocolLib]
+
+commands:
+  hadmin:
+    description: HorizonAdminMonitor admin command.
+    usage: /hadmin reload
+
+permissions:
+  horizonadminmonitor.admin:
+    description: Use /hadmin reload.
+    default: op

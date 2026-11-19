@@ -1,0 +1,16 @@
+# 构建产物
+target/
+libs/*.jar
+tmp/
+
+# 本地文档，不入库
+doc/
+
+# 编辑器与系统
+.idea/
+*.iml
+Thumbs.db
+.DS_Store
+
+# 构建脚本需要入库（原先位于 AEMobile 时靠这条覆盖其根 .gitignore 的 *.bat）
+!build.bat

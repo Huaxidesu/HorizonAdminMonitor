@@ -1,0 +1,91 @@
+# HorizonAdminMonitor
+# 本文件为 UTF-8 编码，请用保持 UTF-8 的编辑器修改，否则中文与模板内容会损坏。
+
+# 播报总开关。关闭后命令播报与 NEI 播报都不工作，重载命令仍然可用。
+enabled: true
+
+# 播报前缀，支持 & 颜色码。
+prefix: "&8[&6红扳手之神&8] &r"
+
+# 控制台或 RCON 执行命令时的执行者名。
+console-name: "控制台"
+
+# 控制台与 RCON 执行的命令是否播报。
+watch-console: true
+
+# 调试模式。开启后执行者本人也能看到自己的播报，并把收到的命令与 NEI 包写入控制台；
+# 关闭后执行者看不到自己的播报，只有其他玩家能看到，便于玩家监督管理员。
+debug: false
+
+# 是否要求执行者确实能使用该命令。开启后普通玩家输入 /give 不会产生播报；
+# 若某些插件的权限节点无法识别，导致管理员的操作漏报，可改为 false。
+require-permission: true
+
+# 排除名单：名单内的玩家执行命令或使用 NEI 作弊面板都不播报。
+# 填玩家名或 UUID 均可，不区分大小写。
+exclude:
+  - "ExampleAdmin"
+
+# 命令规则。每条规则可单独关闭，或覆盖播报模板。
+# 模板占位符见 doc/程序结构.md；未替换的占位符会原样显示。
+commands:
+  give:
+    enabled: true
+    template: "&f%actor% &7给予了 &b%target% &f%item% &7×&e%amount%"
+  item:
+    enabled: true
+    template: "&f%actor% &7取出了 &f%item% &7×&e%amount%"
+  gamemode:
+    enabled: true
+    template: "&f%actor% &7将 &b%target% &7的游戏模式改为 &e%mode%"
+  time:
+    enabled: true
+    template: "&f%actor% &7将时间%time-action% &e%time%"
+  weather:
+    enabled: true
+    template: "&f%actor% &7将天气改为 &e%weather%"
+  effect:
+    enabled: true
+    template: "&f%actor% &7对 &b%target% &7施加了效果 &e%effect%"
+  enchant:
+    enabled: true
+    template: "&f%actor% &7为 &b%target% &7附魔 &e%enchant% &7等级 &e%level%"
+  xp:
+    enabled: true
+    template: "&f%actor% &7给予 &b%target% &e%amount% &7点经验"
+  summon:
+    enabled: true
+    template: "&f%actor% &7召唤了 &e%mob%"
+  tp:
+    enabled: true
+    template: "&f%actor% &7执行了传送 &b%target%"
+  difficulty:
+    enabled: true
+    template: "&f%actor% &7将难度改为 &e%difficulty%"
+  gamerule:
+    enabled: true
+    template: "&f%actor% &7修改了规则 &e%arg1% &7= &e%arg2%"
+  op:
+    enabled: true
+    template: "&f%actor% &7变更了管理员身份：&b%target%"
+  essentials:
+    enabled: true
+    template: "&f%actor% &7执行了 &e/%label%"
+  generic:
+    enabled: true
+    template: "&f%actor% &7执行了 &e/%label% %args%"
+
+# 追加需要播报、但没有专用解析的命令，按 generic 模板播报。
+extra-commands: []
+
+# NEI 作弊面板播报。需要服务端安装 ProtocolLib；模板为空表示不播报。
+nei:
+  enabled: true
+  # 取物品、治疗、改游戏模式、改附魔只有执行者能看到提示，需要播报。
+  give: "&f%actor% &7通过 NEI 取出了 &f%item% &7×&e%amount%"
+  heal: "&f%actor% &7通过 NEI 恢复了生命值"
+  gamemode: "&f%actor% &7通过 NEI 将游戏模式改为 &e%mode%"
+  enchant: "&f%actor% &7通过 NEI 修改了附魔 &e%enchant% &7等级 &e%level%"
+  # 改时间与切换天气：NEI 自身的提示在部分版本里不会显示，统一由插件播报。
+  time: "&f%actor% &7通过 NEI 将时间设为 &e%time%"
+  weather: "&f%actor% &7通过 NEI 将天气切换为 &e%weather%"
