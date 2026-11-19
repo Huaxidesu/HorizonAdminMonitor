@@ -39,6 +39,8 @@ public final class Broadcaster {
             online.sendMessage(line);
         }
         Bukkit.getConsoleSender().sendMessage(plain);
+        // 控制台发送在部分启动方式下不写入 latest.log，另记一条带标记的审计日志
+        plugin.getLogger().info("[播报] " + plain);
     }
 
     /** 替换已知占位符；模板中未被替换的占位符原样保留。 */
